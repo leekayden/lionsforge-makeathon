@@ -91,11 +91,13 @@ def two():
         print(colored('[!] ', 'There was a critical error with the program! Please install the latest LTS version from https://software.cloudservetechcentral.com/download/timetable-sync'))
 
 def three():
+    print()
+    time.sleep(2)
     wb = Workbook()
     ws = wb.active
     print(colored('[3] ', 'magenta') + "Check values")
     print(colored('[i] ', 'blue') + "Checking values...")
-    for cell in ws['C']:
+    for cell in ws['A']:
         print(cell.value)
     cell_range = ws['A2':'A5']
 
