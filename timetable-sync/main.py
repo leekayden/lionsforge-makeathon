@@ -97,9 +97,10 @@ def three():
     ws = wb.active
     print(colored('[3] ', 'magenta') + "Check values")
     print(colored('[i] ', 'blue') + "Checking values...")
-    for cell in ws['A']:
-        print(cell.value)
-    cell_range = ws['A2':'A5']
+    for column in ws.iter_columns():
+        for cell in column:
+            if 'C' in cell.coordinate:
+                print(cell.value)
 
 one()
 print()
