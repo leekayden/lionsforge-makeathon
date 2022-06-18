@@ -8,6 +8,7 @@ import webbrowser
 from termcolor import colored
 import subprocess
 import pandas as pd
+from openpyxl import Workbook
 
 print(r"""
  _____ _                _        _     _        __                  _                     _              
@@ -90,8 +91,13 @@ def two():
         print(colored('[!] ', 'There was a critical error with the program! Please install the latest LTS version from https://software.cloudservetechcentral.com/download/timetable-sync'))
 
 def three():
-    print("For step 3")
-    exit(3)
+    wb = Workbook()
+    ws = wb.active
+    print(colored('[3] ', 'magenta') + "Check values")
+    print(colored('[i] ', 'blue') + "Checking values...")
+    for cell in ws['C']:
+        print(cell.value)
+    cell_range = ws['A2':'A5']
 
 one()
 print()
