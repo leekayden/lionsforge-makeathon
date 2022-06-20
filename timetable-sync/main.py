@@ -10,6 +10,7 @@ from termcolor import colored
 from collections import defaultdict
 import subprocess
 import timeit
+import mpu.pd
 import pandas as pd
 
 if name == 'nt':
@@ -45,18 +46,18 @@ def steps():
         1. Download sample timetable
         2. Upload timetable
             > Use default settings
-            > Use custom settings
+            > Use custom settings (not available)
         3. Check values
         4. Parse values
         5. Send values to raspberry pi
         6. Download values for debugging or future use (optional)
         """)
 
-    time.sleep(2)
+    time.sleep(.5)
 
     print(colored('[?] ', 'yellow') + "Press any key to continue...")
     keyboard.read_key()
-    time.sleep(3)
+    time.sleep(.5)
     print()
 
 
@@ -149,21 +150,32 @@ def three():
         print(colored('[!] ', 'red') + "There was a critical error with the program! Please install the latest LTS version from https://software.cloudservetechcentral.com/download/timetable-sync")
 
 def four():
-    print(colored('[4] ', 'magenta') + "Parse values\n")
+    print(colored('\n[4] ', 'magenta') + "Parse values\n")
     print(colored('[i] ', 'blue') + "Please wait while we parse the values into machine-readable text. You can ignore the wierd formatting on the screen.")
     time.sleep(2)
     print()
-    columns = defaultdict(list) # each value in each column is appended to a list
-    with open(file_name) as f:
-        reader = csv.DictReader(f) # read rows into a dictionary format
-        for row in reader: # read a row as {column1: value1, column2: value2,...}
-            for (k,v) in row.items(): # go over each column name and value 
-                columns[k].append(v) # append the value into the appropriate list based on column name k
+    columns = defaultdict(list)
 
-    # print(list)
+    # Stores columns and rows into a dict
+    with open(file_name) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            for (k,v) in row.items():
+                columns[k].append(v)
+
+    # Prints dict out line by line
+    for key, value in columns.items():
+        print(key, ' : ', value)
+
+    for value in columns.items():
+        print(value)
+
     print(columns['Time'])
     print(columns['Lesson'])
     print(columns['Lights'])
+
+
+    # print(list)
     print()
 
 # four()
