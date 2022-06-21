@@ -26,17 +26,17 @@ print(r"""
  \/   |_|_| |_| |_|\___|\__\__,_|_.__/|_|\___| \__/\__, |_| |_|\___|_| |_|_|  \___/|_| |_|_/___\___|_|   
                                                    |___/                                                 
 """)
-time.sleep(.5)
+time.sleep(.25)
 print()
-time.sleep(.5)
+time.sleep(.25)
 print(colored('[i] ', 'blue') + "Welcome to the Timetable Synchronizer")
-time.sleep(.5)
+time.sleep(.25)
 print(colored('[c] ', 'blue') + "(c) Copyright 2022 Kayden Lee (Cloudserve Tech)")
-time.sleep(.5)
+time.sleep(.25)
 print(colored('[v] ', 'blue') + "v1.2 Pre-release Dev Build 1762022")
-time.sleep(.5)
+time.sleep(.25)
 print(colored('[www] ', 'blue') + "https://cloudservetechcentral.com/")
-time.sleep(.5)
+time.sleep(.25)
 print()
 
 def steps():
@@ -77,7 +77,7 @@ def two():
     time.sleep(2)
     global file_name
     file_name = input(colored('[i] ', 'blue') + "Please enter the exact location of the timetable\n" + colored('[?] ', 'yellow') + ">_ ")
-    time.sleep(2)
+    time.sleep(.25)
     # print(colored('[i] ', 'blue') + "Opening file in explorer... Please ensure that the path of your excel document is correct.")
     # time.sleep(2)
     # subprocess.Popen(r'explorer /select,' + file_name)
@@ -89,7 +89,8 @@ def two():
         header = next(csvreader)
         for row in csvreader:
             rows.append(row)
-
+    
+    global df
     df = pd.read_csv(file_name)
     print(df)
 
@@ -103,6 +104,7 @@ def two():
     elif response == "no":
         print(colored('[i] ', 'blue') + "Restarting step 2...")
         time.sleep(2.5)
+        print()
         two()
     else:
         print(colored('[!] ', 'red') + "There was a critical error with the program! Please install the latest LTS version from https://software.cloudservetechcentral.com/download/timetable-sync")
@@ -174,8 +176,13 @@ def four():
     print(columns['Lesson'])
     print(columns['Lights'])
 
+    rows = 0
+    for row in open(file_name):
+        rows += 1
+    print("Rows: ")
+    rows = rows - 1
+    print(rows)
 
-    # print(list)
     print()
 
 # four()
