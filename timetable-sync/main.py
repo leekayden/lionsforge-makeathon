@@ -183,7 +183,10 @@ def four():
     rows = rows - 1
     print(rows)
 
-    print()
+    print("=================================")
+
+    for column in open(file_name):
+        pd.to_datetime(%H:%M)
 
 # four()
 steps()
