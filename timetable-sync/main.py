@@ -185,8 +185,8 @@ def four():
 
     print("=================================")
 
-    for column in open(file_name):
-        pd.to_datetime(%H:%M)
+    # for column in open(file_name):
+    #     pd.to_datetime(%H:%M)
 
 # four()
 steps()
