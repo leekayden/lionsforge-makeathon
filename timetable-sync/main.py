@@ -12,6 +12,7 @@ import subprocess
 import timeit
 import mpu.pd
 import pandas as pd
+# import RPi.GPIO as GPIO
 
 if name == 'nt':
     _ = system('cls')
@@ -26,6 +27,9 @@ print(r"""
  \/   |_|_| |_| |_|\___|\__\__,_|_.__/|_|\___| \__/\__, |_| |_|\___|_| |_|_|  \___/|_| |_|_/___\___|_|   
                                                    |___/                                                 
 """)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setwarnings(True)
+# GPIO.setup(18, GPIO.OUT)
 time.sleep(.25)
 print()
 time.sleep(.25)
@@ -38,6 +42,14 @@ time.sleep(.25)
 print(colored('[www] ', 'blue') + "https://cloudservetechcentral.com/")
 time.sleep(.25)
 print()
+
+def lights(status, time):
+    if status == "on":
+        # light up
+        time.sleep(time)
+    if status == "off":
+        # power off
+        time.sleep(time)
 
 def steps():
     print(r"""
@@ -184,6 +196,30 @@ def four():
     print(rows)
 
     print("=================================")
+
+    print()
+    df = pd.read_csv(
+        file_name,
+        skiprows=1
+    )
+
+    print(columns['Duration'])
+
+    lightonoff = pd.read_csv(file_name)
+
+    lightonoff.loc[lightonoff['Lights'] == 'Yes', 'Y/n'] = "Yes"
+    lightonoff.loc[lightonoff['Lights'] != 'Yes', 'Y/n'] = "No"
+    print(lightonoff, end = '\n\n')
+    arrlightonoff = lightonoff.loc[:,"Y/n"].tolist()
+    for cell in arrlightonoff:
+        if cell.lower() == "yes": print("LIGHT ON")
+        else: print("Lights OUT")
+
+    arrDuration = lightonoff.loc[:,"Duration"].tolist()
+    for cellFloat in arrDuration:
+        print(cellFloat)
+
+    
 
     # for column in open(file_name):
     #     pd.to_datetime(%H:%M)

@@ -1,5 +1,5 @@
-﻿Time,Lesson,Lights
-730,FT,Yes
-800,English,Yes
-900,PE,No
-1000,Recess,No
+﻿Time,Lesson,Lights,Duration
+730,FT,Yes,30
+800,English,Yes,60
+900,PE,No,60
+1000,Recess,No,

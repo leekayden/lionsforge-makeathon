@@ -1,44 +1,14 @@
-import timeit
-import csv
 import pandas as pd
+lightonoff = pd.read_csv("./sample-timetable.csv")
 
-filename = './sample-timetable.csv'
+lightonoff.loc[lightonoff['Lights'] == 'Yes', 'Y/n'] = "Yes"
+lightonoff.loc[lightonoff['Lights'] != 'Yes', 'Y/n'] = "No"
+print(lightonoff, end = '\n\n')
+arrlightonoff = lightonoff.loc[:,"Y/n"].tolist()
+for cell in arrlightonoff:
+    if cell.lower() == "yes": print("LIGHT ON")
+    else: print("Lights OUT")
 
-def talktime(filename, funcname, func):
-    print(f"# {funcname}")
-    t = timeit.timeit(f'{funcname}("{filename}")', setup=f'from __main__ import {funcname}', number = 100) / 100
-    print('Elapsed time : ', t)
-    print('n = ', func(filename))
-    print('\n')
-
-def sum1forline(filename):
-    with open(filename) as f:
-        return sum(1 for line in f)
-talktime(filename, 'sum1forline', sum1forline)
-
-def lenopenreadlines(filename):
-    with open(filename) as f:
-        return len(f.readlines())
-talktime(filename, 'lenopenreadlines', lenopenreadlines)
-
-def lenpd(filename):
-    return len(pd.read_csv(filename)) + 1
-talktime(filename, 'lenpd', lenpd)
-
-def csvreaderfor(filename):
-    cnt = 0
-    with open(filename) as f:
-        cr = csv.reader(f)
-        for row in cr:
-            cnt += 1
-    return cnt
-talktime(filename, 'csvreaderfor', csvreaderfor)
-print(csvreaderfor(filename))
-
-def openenum(filename):
-    cnt = 0
-    with open(filename) as f:
-        for i, line in enumerate(f,1):
-            cnt += 1
-    return cnt
-talktime(filename, 'openenum', openenum)
+arrDuration = lightonoff.loc[:,"Duration"].tolist()
+for cellFloat in arrDuration:
+    print(cellFloat)
