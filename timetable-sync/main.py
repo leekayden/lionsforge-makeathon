@@ -8,9 +8,6 @@ import time
 import webbrowser
 from termcolor import colored
 from collections import defaultdict
-import subprocess
-import timeit
-import mpu.pd
 import pandas as pd
 # import RPi.GPIO as GPIO
 
@@ -171,33 +168,6 @@ def four():
     print(colored('\n[4] ', 'magenta') + "Parse values\n")
     print(colored('[i] ', 'blue') + "Please wait while we parse the values into machine-readable text. You can ignore the wierd formatting on the screen.")
     time.sleep(2)
-    print()
-    columns = defaultdict(list)
-
-    # Stores columns and rows into a dict
-    with open(file_name) as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            for (k,v) in row.items():
-                columns[k].append(v)
-
-    # Prints dict out line by line
-    for key, value in columns.items():
-        print(key, ' : ', value)
-
-    for value in columns.items():
-        print(value)
-
-    print(columns['Time'])
-    print(columns['Lesson'])
-    print(columns['Lights'])
-
-    rows = 0
-    for row in open(file_name):
-        rows += 1
-    print("Rows: ")
-    rows = rows - 1
-    print(rows)
 
     print("=================================")
 
