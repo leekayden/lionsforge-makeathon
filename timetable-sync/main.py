@@ -47,9 +47,13 @@ def lights(status, time):
     if status == "on":
         # light up
         time.sleep(time)
-    if status == "off":
+        # light off
+    elif status == "off":
         # power off
-        time.sleep(time)
+        print(time)
+        # power off
+    else:
+        print("Error")
 
 def steps():
     print(r"""
@@ -212,13 +216,23 @@ def four():
     print(lightonoff, end = '\n\n')
     arrlightonoff = lightonoff.loc[:,"Y/n"].tolist()
     for cell in arrlightonoff:
-        if cell.lower() == "yes": print("LIGHT ON")
-        else: print("Lights OUT")
+        if cell.lower() == "yes":
+            print("LIGHT ON")
+        else:
+            print("Lights OUT")
 
     arrDuration = lightonoff.loc[:,"Duration"].tolist()
     for cellFloat in arrDuration:
         print(cellFloat)
 
+
+    arrLightStatus = lightonoff.loc[:,"Y/n"].tolist()
+    arrDuration = lightonoff.loc[:,"Duration"].tolist()
+    for lightStat, duration in zip(arrLightStatus, arrDuration):
+        if lightStat.lower() == 'yes':
+            lights('on', duration)
+        else:
+            lights('off', duration)
     
 
     # for column in open(file_name):
